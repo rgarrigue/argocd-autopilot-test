@@ -28,3 +28,19 @@ kind delete cluster
 kind create cluster
 argocd-autopilot repo bootstrap --recover
 ```
+
+Full wipe
+
+```
+cd argocd-autopilot-test
+git pull
+kind delete cluster
+rm -rf apps bootstrap project 
+git add .
+git commit -m "chore: full wipe"
+git push
+kind create cluster
+argocd-autopilot repo bootstrap
+git pull
+```
+
