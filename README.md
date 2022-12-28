@@ -19,6 +19,17 @@ screen -dmS kpf8080 kubectl port-forward -n argocd svc/argocd-server 8080:80
 
 Copy the password given at the end of the bootstrap, then head to http://localhost:8080, admin / <password>
 
+## Experiment
+
+Tuto style https://argocd-autopilot.readthedocs.io/en/stable/Getting-Started/#add-a-project-and-an-application
+
+```
+argocd-autopilot project create dev
+argocd-autopilot project create stg
+argocd-autopilot project create prod
+argocd-autopilot app create hello-world --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p dev --wait-timeout 2m
+```
+
 ## Iterate
 
 Wipe cluster & restart
