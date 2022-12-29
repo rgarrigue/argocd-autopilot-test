@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: kutt
+    repo: https://github.com/rgarrigue/helm-chart-httpbin
+    # version: master
+    # releaseName: ponyponyrunrun
+    includeCRDs: false
+    valuesInline:
+      nameOverride: httpbin
+      serviceAccount:
+        create: false
