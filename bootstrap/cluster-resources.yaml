@@ -11,6 +11,7 @@ spec:
         files:
           - path: bootstrap/cluster-resources/*.json
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
+        revision: HEAD
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
