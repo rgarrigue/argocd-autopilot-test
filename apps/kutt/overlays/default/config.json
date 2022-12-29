@@ -1,9 +1,9 @@
 {
-  "appName": "hello-world",
-  "userGivenName": "hello-world",
+  "appName": "kutt",
+  "userGivenName": "kutt",
   "destNamespace": "default",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/hello-world/overlays/default",
+  "srcPath": "apps/kutt/overlays/default",
   "srcRepoURL": "https://github.com/rgarrigue/argocd-autopilot-test.git",
   "srcTargetRevision": "",
   "labels": null,
