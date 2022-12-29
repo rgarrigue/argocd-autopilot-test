@@ -19,7 +19,7 @@ spec:
       kind: Application
   project: default
   source:
-    path: projects
+    path: projects/*
     repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
   syncPolicy:
     automated:
