@@ -10,8 +10,8 @@ spec:
   generators:
     - git:
         files:
-          - path: apps/hello-world/base/config.json
-          - path: apps/hello-world/dev/config.json
+          - path: apps/kutt/base/*.yaml
+          - path: apps/kutt/dev/*.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
   template:
     metadata:

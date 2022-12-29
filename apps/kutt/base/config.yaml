@@ -1,0 +1,9 @@
+appName: kutt
+userGivenName: kutt
+destNamespace: kutt
+destServer: https://kubernetes.default.svc
+srcPath: /
+srcRepoURL: https://github.com/rgarrigue/helm-chart-kutt.git
+srcTargetRevision:
+labels: null
+annotations: null
