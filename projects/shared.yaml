@@ -36,7 +36,7 @@ spec:
   generators:
     - git:
         files:
-          - path: apps/**/shared/config.json
+          - path: apps/**/shared/config.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         requeueAfterSeconds: 20
         revision: ""
@@ -49,7 +49,7 @@ spec:
               repoURL: ""
     - git:
         files:
-          - path: apps/**/shared/config_dir.json
+          - path: apps/**/shared/config_dir.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         requeueAfterSeconds: 20
         revision: ""
