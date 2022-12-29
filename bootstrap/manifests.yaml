@@ -9,8 +9,9 @@ spec:
   generators:
     - git:
         files:
-          - path: bootstrap/cluster-resources/*.json
+          - path: bootstrap/cluster-resources/*.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
+        revision: HEAD
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:

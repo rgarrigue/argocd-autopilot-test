@@ -20,7 +20,6 @@ spec:
       kind: "*"
   sourceRepos:
     - "*"
-status: {}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -81,4 +80,3 @@ spec:
           allowEmpty: true
           prune: true
           selfHeal: true
-status: {}
