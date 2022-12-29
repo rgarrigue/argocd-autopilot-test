@@ -1,2 +1,2 @@
-name: in-cluster
-server: https://kubernetes.default.svc
+appName: in-cluster
+clusterUrl: https://kubernetes.default.svc

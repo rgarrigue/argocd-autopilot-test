@@ -26,12 +26,12 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: cluster-resources-{{name}}
-      name: cluster-resources-{{name}}
+        app.kubernetes.io/name: cluster-resources-{{appName}}
+      name: cluster-resources-{{appName}}
       namespace: argocd
     spec:
       destination:
-        server: "{{server}}"
+        server: "{{clusterUrl}}"
       ignoreDifferences:
         - group: argoproj.io
           jsonPointers:
@@ -39,7 +39,7 @@ spec:
           kind: Application
       project: default
       source:
-        path: bootstrap/cluster-resources/{{name}}
+        path: bootstrap/cluster-resources/{{appName}}
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
       syncPolicy:
         automated:
