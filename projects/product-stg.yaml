@@ -68,8 +68,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: "{{ appName }}"
-      name: product-stg-{{ userGivenName }}
+        app.kubernetes.io/name: "{{ path[1] }}"
+      name: product-stg-{{ {{ path[1] }} }}
       namespace: argocd
     spec:
       destination:
@@ -82,9 +82,9 @@ spec:
           kind: Application
       project: product-stg
       source:
-        path: "{{ srcPath }}"
-        repoURL: "{{ srcRepoURL }}"
-        targetRevision: "{{ srcTargetRevision }}"
+        path: "{{ path }}"
+        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
+        targetRevision: HEAD
       syncPolicy:
         automated:
           allowEmpty: true
