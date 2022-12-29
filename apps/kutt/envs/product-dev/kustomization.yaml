@@ -5,7 +5,4 @@ resources:
   - ../../base
 
 components:
-  - ../../variants/product
   - ../../variants/non-prod
-
-patchesStrategicMerge: []
