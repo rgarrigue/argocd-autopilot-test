@@ -24,10 +24,12 @@ Copy the password given at the end of the bootstrap, then head to http://localho
 Tuto style https://argocd-autopilot.readthedocs.io/en/stable/Getting-Started/#add-a-project-and-an-application
 
 ```
-argocd-autopilot project create dev
-argocd-autopilot project create stg
-argocd-autopilot project create prod
-argocd-autopilot app create hello-world --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p dev --wait-timeout 2m
+argocd-autopilot project create data-dev
+argocd-autopilot project create data-prod
+argocd-autopilot project create product-dev
+argocd-autopilot project create product-stg
+argocd-autopilot project create product-prod
+argocd-autopilot app create hello-world --app github.com/argoproj-labs/argocd-autopilot/examples/demo-app/ -p product-dev --wait-timeout 2m
 ```
 
 ## Iterate
