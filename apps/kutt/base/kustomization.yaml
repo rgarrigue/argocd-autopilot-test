@@ -5,9 +5,7 @@ namespace: product
 
 helmCharts:
   - name: kutt
-    repo: https://github.com/rgarrigue/helm-chart-kutt
-    version: master
-    releaseName: ponyponyrunrun
+    repo: https://raw.githubusercontent.com/rgarrigue/helm-chart-kutt/main/docs
     includeCRDs: false
     valuesInline:
       replicatCount: 2
