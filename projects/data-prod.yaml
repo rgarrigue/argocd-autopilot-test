@@ -69,7 +69,7 @@ spec:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
         app.kubernetes.io/name: "{{ path[1] }}"
-      name: data-prod-{{ {{ path[1] }} }}
+      name: data-prod-{{ path[1] }}
       namespace: argocd
     spec:
       destination:
