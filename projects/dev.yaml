@@ -32,31 +32,31 @@ metadata:
 spec:
   generators:
     - git:
-        files:
-          - path: apps/**/dev/config.json
+        directories:
+          - path: apps/*/dev
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         revision: HEAD
   template:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: "{{ appName }}"
-      name: dev-{{ userGivenName }}
+        app.kubernetes.io/name: "{{ name }}"
+      name: "{{ path[1] }}-{{ path[2] }}"
       namespace: argocd
     spec:
       destination:
-        namespace: "{{ destNamespace }}"
-        server: "{{ destServer }}"
+        namespace: "{{ path[2] }}"
+        server: https://kubernetes.default.svc # aka dev cluster
       ignoreDifferences:
         - group: argoproj.io
           jsonPointers:
             - /status
           kind: Application
-      project: dev
+      project: "{{ path[2] }}"
       source:
-        path: "{{ srcPath }}"
-        repoURL: "{{ srcRepoURL }}"
-        targetRevision: "{{ srcTargetRevision }}"
+        path: "{{ path }}"
+        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
+        targetRevision: HEAD
       syncPolicy:
         automated:
           allowEmpty: true
