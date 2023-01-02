@@ -1,0 +1,9 @@
+# environment's values
+
+replicaCount: 2
+
+env:
+  MAIL_HOST: smtp.mailgun.org
+  MAIL_USER: whatever
+  MAIL_PASSWORD: whatever_too
+  SCYLLA_NODES: 1.2.3.4,1.2.3.5

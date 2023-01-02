@@ -5,13 +5,13 @@ metadata:
     argocd-autopilot.argoproj-labs.io/default-dest-server: https://kubernetes.default.svc
     argocd.argoproj.io/sync-options: PruneLast=true
     argocd.argoproj.io/sync-wave: "-2"
-  name: product-stg
+  name: product-devs
   namespace: argocd
 spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-  description: product-stg project
+  description: product-devs project
   destinations:
     - namespace: "*"
       server: "*"
@@ -27,13 +27,13 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  name: product-stg
+  name: product-devs
   namespace: argocd
 spec:
   generators:
     - git:
         files:
-          - path: envs/product-stg/*/config.yaml
+          - path: envs/product-dev-*/*/config.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         revision: ""
   syncPolicy:

@@ -1,0 +1,4 @@
+# ArgoCD config file
+
+destNamespace: product-dev-02
+destServer: https://kubernetes.default.svc

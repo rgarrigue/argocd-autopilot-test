@@ -1,6 +1,0 @@
-values_lineage:
-  - apps/kutt/envs/product-stg/values-env.yaml
-
-env:
-  DEFAULT_DOMAIN: stg.company.cong
-  JWT_SECRET: nevermind

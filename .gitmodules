@@ -1,3 +1,6 @@
-[submodule "apps/kutt/chart"]
-path = apps/kutt/chart
+[submodule "charts/httpbin"]
+path = charts/httpbin
 url = https://github.com/rgarrigue/helm-chart-kutt
+[submodule "charts/httpbin"]
+path = charts/httpbin
+url = git@github.com:rgarrigue/helm-chart-httpbin.git

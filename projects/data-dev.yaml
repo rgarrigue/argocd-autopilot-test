@@ -11,7 +11,7 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-  description: data-dev project
+  description: data-dev  project
   destinations:
     - namespace: "*"
       server: "*"
@@ -20,7 +20,6 @@ spec:
       kind: "*"
   sourceRepos:
     - "*"
-status: {}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -34,56 +33,36 @@ spec:
   generators:
     - git:
         files:
-          - path: apps/**/data-dev/config.yaml
+          - path: envs/data-dev/*/config.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
-        requeueAfterSeconds: 20
         revision: ""
-        template:
-          metadata: {}
-          spec:
-            destination: {}
-            project: ""
-            source:
-              repoURL: ""
-    - git:
-        files:
-          - path: apps/**/data-dev/config_dir.yaml
-        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
-        requeueAfterSeconds: 20
-        revision: ""
-        template:
-          metadata: {}
-          spec:
-            destination: {}
-            project: ""
-            source:
-              directory:
-                exclude: "{{ exclude }}"
-                include: "{{ include }}"
-                jsonnet: {}
-                recurse: true
-              repoURL: ""
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
   template:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: "{{ path[1] }}"
-      name: data-dev-{{ path[1] }}
+        app.kubernetes.io/name: "{{ path[2] }}"
+      name: "{{ path[1] }}-{{ path[2] }}"
       namespace: argocd
     spec:
-      project: data-dev
+      project: "{{ path[1] }}"
       source:
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         targetRevision: HEAD
-        path: "{{ path }}/../../chart"
+        path: "charts/{{ path[2] }}" # works if eponym chart
         helm:
-          # ignoreMissingValueFiles: true
+          ignoreMissingValueFiles: true
           valueFiles:
-            - values*.yaml
-            - ../../common/values*.yaml
-            - ../common/values*.yaml
-            - ../envs/data-dev/values*.yaml
+            - values.yaml # chart values
+            - ../../envs/values.yaml # global values
+            - ../../envs/{{ path[1] }}/values.yaml # environment values
+            # app specific values
+            - ../../envs/{{ path[1] }}/{{ path[2] }}/values-settings.yaml
+            - ../../envs/{{ path[1] }}/{{ path[2] }}/values-version.yaml
+            - ../../envs/{{ path[1] }}/{{ path[2] }}/values-fixes.yaml
       destination:
         namespace: "{{ destNamespace }}"
         server: "{{ destServer }}"

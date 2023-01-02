@@ -1,5 +1,0 @@
-values_lineage:
-  - apps/global/product-dev/values.yaml
-
-env:
-  - SCYLLA_NODES:
