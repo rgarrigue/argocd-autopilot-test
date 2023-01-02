@@ -5,13 +5,13 @@ metadata:
     argocd-autopilot.argoproj-labs.io/default-dest-server: https://kubernetes.default.svc
     argocd.argoproj.io/sync-options: PruneLast=true
     argocd.argoproj.io/sync-wave: "-2"
-  name: product-prod
+  name: product-dev
   namespace: argocd
 spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-  description: product-prod project
+  description: product-dev project
   destinations:
     - namespace: "*"
       server: "*"
@@ -28,7 +28,7 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  name: product-prod
+  name: products
   namespace: argocd
 spec:
   generators:
@@ -63,26 +63,32 @@ spec:
                 jsonnet: {}
                 recurse: true
               repoURL: ""
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
   template:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
         app.kubernetes.io/name: "{{ path[1] }}"
-      name: product-prod-{{ path[1] }}
+      name: product-dev-{{ path[1] }}
       namespace: argocd
     spec:
-      project: product-prod
+      project: "{{ path[3] }}"
       source:
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         targetRevision: HEAD
         path: "{{ path }}/../../chart"
         helm:
-          # ignoreMissingValueFiles: true
+          ignoreMissingValueFiles: true
           valueFiles:
-            - values*.yaml
-            - ../../common/values*.yaml
-            - ../common/values*.yaml
-            - ../envs/product-prod/values*.yaml
+            - values.yaml
+            - ../../common/values.yaml
+            - ../common/values.yaml
+            - ../envs/{{ path[3] }}/values-env.yaml
+            - ../envs/{{ path[3] }}/values-version.yaml
+            - ../envs/{{ path[3] }}/values-fixes.yaml
       destination:
         namespace: "{{ destNamespace }}"
         server: "{{ destServer }}"

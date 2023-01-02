@@ -28,13 +28,13 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  name: product-dev
+  name: products
   namespace: argocd
 spec:
   generators:
     - git:
         files:
-          - path: apps/**/product-dev/config.yaml
+          - path: apps/**/product-others-**/config.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         requeueAfterSeconds: 20
         revision: ""
@@ -47,7 +47,7 @@ spec:
               repoURL: ""
     - git:
         files:
-          - path: apps/**/product-dev/config_dir.yaml
+          - path: apps/**/product-others-**/config_dir.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         requeueAfterSeconds: 20
         revision: ""
@@ -75,7 +75,7 @@ spec:
       name: product-dev-{{ path[1] }}
       namespace: argocd
     spec:
-      project: product-dev
+      project: "{{ path[3] }}"
       source:
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         targetRevision: HEAD
@@ -86,9 +86,9 @@ spec:
             - values.yaml
             - ../../common/values.yaml
             - ../common/values.yaml
-            - ../envs/product-dev/values-env.yaml
-            - ../envs/product-dev/values-version.yaml
-            - ../envs/product-dev/values-fixes.yaml
+            - ../envs/{{ path[3] }}/values-env.yaml
+            - ../envs/{{ path[3] }}/values-version.yaml
+            - ../envs/{{ path[3] }}/values-fixes.yaml
       destination:
         namespace: "{{ destNamespace }}"
         server: "{{ destServer }}"
