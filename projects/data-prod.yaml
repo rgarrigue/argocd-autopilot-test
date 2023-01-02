@@ -78,7 +78,7 @@ spec:
         targetRevision: HEAD
         path: "{{ path }}/../../chart"
         helm:
-          ignoreMissingValueFiles: true
+          # ignoreMissingValueFiles: true
           valueFiles:
             - values*.yaml
             - ../../common/values*.yaml
