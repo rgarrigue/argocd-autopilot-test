@@ -1,0 +1,3 @@
+[submodule "apps/kutt/chart"]
+	path = apps/kutt/chart
+	url = git@github.com:rgarrigue/helm-chart-kutt.git
