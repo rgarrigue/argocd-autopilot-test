@@ -1,2 +1,5 @@
 values_lineage:
   - apps/kutt/envs/product-prod/values-version.yaml
+
+image:
+  tag: v2.7.3

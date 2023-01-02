@@ -1,2 +1,6 @@
 values_lineage:
   - apps/kutt/envs/product-dev/values-env.yaml
+
+env:
+  DEFAULT_DOMAIN: dev.company.cong
+  JWT_SECRET: nevermind

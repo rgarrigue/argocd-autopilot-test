@@ -1,2 +1,7 @@
 values_lineage:
   - apps/kutt/common/values-common.yaml
+
+env:
+  MAIL_HOST: smtp.mailgun.org
+  MAIL_USER: whatever
+  MAIL_PASSWORD: whatever_too
