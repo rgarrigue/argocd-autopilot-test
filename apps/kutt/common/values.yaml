@@ -1,5 +1,5 @@
 values_lineage:
-  - apps/kutt/common/values-common.yaml
+  - apps/kutt/common/values.yaml
 
 env:
   MAIL_HOST: smtp.mailgun.org
