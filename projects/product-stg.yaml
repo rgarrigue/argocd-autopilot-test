@@ -75,7 +75,7 @@ spec:
       source:
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         targetRevision: HEAD
-        path: "{{ path }}../../chart"
+        path: "{{ path }}/../../chart"
         helm:
           ignoreMissingValueFiles: true
           valueFiles:
