@@ -11,7 +11,7 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
-  description: shared project
+  description: shared services project
   destinations:
     - namespace: "*"
       server: "*"
@@ -20,7 +20,6 @@ spec:
       kind: "*"
   sourceRepos:
     - "*"
-status: {}
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -34,60 +33,46 @@ spec:
   generators:
     - git:
         files:
-          - path: apps/**/shared/config.yaml
+          - path: envs/shared/*/config.yaml
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
-        requeueAfterSeconds: 20
         revision: ""
-        template:
-          metadata: {}
-          spec:
-            destination: {}
-            project: ""
-            source:
-              repoURL: ""
-    - git:
-        files:
-          - path: apps/**/shared/config_dir.yaml
-        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
-        requeueAfterSeconds: 20
-        revision: ""
-        template:
-          metadata: {}
-          spec:
-            destination: {}
-            project: ""
-            source:
-              directory:
-                exclude: "{{ exclude }}"
-                include: "{{ include }}"
-                jsonnet: {}
-                recurse: true
-              repoURL: ""
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
   template:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: "{{ path[1] }}"
-      name: shared-{{ path[1] }}
+        app.kubernetes.io/name: "{{ path[2] }}"
+      name: "{{ path[1] }}-{{ path[2] }}"
       namespace: argocd
     spec:
+      project: "{{ path[1] }}"
+      source:
+        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
+        targetRevision: HEAD
+        path: "charts/{{ path[2] }}" # works if eponym chart
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+            - values.yaml # chart values
+            - ../../envs/values.yaml # global values
+            - ../../envs/{{ path[1] }}/values.yaml # environment values
+            # app specific values
+            - ../../envs/{{ path[1] }}/{{ path[2] }}/values-settings.yaml
+            - ../../envs/{{ path[1] }}/{{ path[2] }}/values-version.yaml
+            - ../../envs/{{ path[1] }}/{{ path[2] }}/values-fixes.yaml
       destination:
         namespace: "{{ destNamespace }}"
-        server: https://kubernetes.default.svc
+        server: "{{ destServer }}"
       ignoreDifferences:
         - group: argoproj.io
           jsonPointers:
             - /status
           kind: Application
-      project: shared
-      source:
-        path: "{{ path }}"
-        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
-        targetRevision: HEAD
       syncPolicy:
         automated:
           allowEmpty: true
           prune: true
           selfHeal: true
-status: {}
