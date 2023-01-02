@@ -63,7 +63,10 @@ spec:
                 jsonnet: {}
                 recurse: true
               repoURL: ""
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
   template:
     metadata:
       labels:
@@ -72,6 +75,17 @@ spec:
       name: product-dev-{{ path[1] }}
       namespace: argocd
     spec:
+      project: product-dev
+      source:
+        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
+        targetRevision: HEAD
+        path: "{{ path }}../../chart"
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+            - ../../../common/values*.yaml
+            - ../../common/values*.yaml
+            - values*.yaml
       destination:
         namespace: "{{ destNamespace }}"
         server: "{{ destServer }}"
@@ -80,14 +94,8 @@ spec:
           jsonPointers:
             - /status
           kind: Application
-      project: product-dev
-      source:
-        path: "{{ path }}"
-        repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
-        targetRevision: HEAD
       syncPolicy:
         automated:
           allowEmpty: true
           prune: true
           selfHeal: true
-status: {}
