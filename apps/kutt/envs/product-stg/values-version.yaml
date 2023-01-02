@@ -1,0 +1,2 @@
+values_lineage:
+  - apps/kutt/envs/product-stg/values-version.yaml

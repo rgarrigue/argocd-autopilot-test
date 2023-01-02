@@ -1,0 +1,2 @@
+values_lineage:
+  - apps/kutt/common/values-common.yaml

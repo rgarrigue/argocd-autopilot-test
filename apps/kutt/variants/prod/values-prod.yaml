@@ -1,0 +1,2 @@
+values_lineage:
+  - apps/kutt/variants/prod/values-prod.yaml
