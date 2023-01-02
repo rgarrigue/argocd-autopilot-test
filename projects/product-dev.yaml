@@ -83,9 +83,10 @@ spec:
         helm:
           ignoreMissingValueFiles: true
           valueFiles:
-            - ../../../common/values*.yaml
-            - ../../common/values*.yaml
             - values*.yaml
+            - ../../common/values*.yaml
+            - ../common/values*.yaml
+            - ../envs/product-dev
       destination:
         namespace: "{{ destNamespace }}"
         server: "{{ destServer }}"
