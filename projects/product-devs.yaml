@@ -48,7 +48,7 @@ spec:
       name: "{{ path[1] }}-{{ path[2] }}"
       namespace: argocd
     spec:
-      project: "{{ path[1] }}"
+      project: product-devs
       source:
         repoURL: https://github.com/rgarrigue/argocd-autopilot-test.git
         targetRevision: HEAD
