@@ -1,6 +1,6 @@
-[submodule "charts/httpbin"]
-path = charts/httpbin
+[submodule "charts/kutt"]
+path = charts/kutt
 url = https://github.com/rgarrigue/helm-chart-kutt
 [submodule "charts/httpbin"]
 path = charts/httpbin
-url = git@github.com:rgarrigue/helm-chart-httpbin.git
+url = https://github.com/rgarrigue/helm-chart-httpbin
